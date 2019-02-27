@@ -9,7 +9,7 @@ From: shub://singularityhub/ubuntu
 %post
     apt-get update && apt-get install --assume-yes apt-utils
     apt-get install -y perlbrew
-    env | grep -i ^perl 
+    /usr/bin/env >&2
 
 %script
     perl
