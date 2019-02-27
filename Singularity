@@ -9,7 +9,6 @@ From: shub://singularityhub/ubuntu
 %post
     apt-get update && apt-get install --assume-yes apt-utils
     apt-get install -y perlbrew
-    perlbrew init
     env | grep -i ^perl >> $SINGULARITY_ENVIRONMENT
 
 %script
