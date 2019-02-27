@@ -1,5 +1,6 @@
-Bootstrap: library
+BootStrap: library
 From: ubuntu:18.10
+Library: https://cloud.sylabs.io/library
 
 %labels
     Author kiwiroy@users-noreply.github.com
