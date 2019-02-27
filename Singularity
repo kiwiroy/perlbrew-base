@@ -7,7 +7,8 @@ From: shub://singularityhub/ubuntu
     Version 1.00
 
 %post
-    apt-get update && apt-get install -y perlbrew
+    apt-get update && apt-get install --assume-yes apt-utils
+    apt-get install -y perlbrew
     perlbrew init
     env | grep -i ^perl >> $SINGULARITY_ENVIRONMENT
 
