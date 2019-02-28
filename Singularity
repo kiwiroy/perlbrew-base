@@ -6,15 +6,13 @@ From: ubuntu:bionic
     Maintainer kiwiroy@users-noreply.github.com
     Version 1.00
 
-%environment
-    export PERLBREW_ROOT=/opt/perl5/perlbrew
-
 %post
+    export PERLBREW_ROOT=/opt/perl5/perlbrew
     env
-    mkdir -p /opt/perl5/perlbrew
+    mkdir -p ${PERLBREW_ROOT}
     apt-get -y update && apt-get -y install curl perl
     curl -L https://install.perlbrew.pl | bash
-    perlbrew init
+    ${PERLBREW_ROOT}/bin/perlbrew init
     SHELL=bash perlbrew env >> $SINGULARITY_ENVIRONMENT 
 
 %runscript
