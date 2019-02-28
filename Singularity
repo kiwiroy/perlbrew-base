@@ -9,7 +9,7 @@ From: ubuntu:bionic
 %post
     apt-get update && apt-get install -y perlbrew
     perlbrew init
-    SHELL=ash perlbrew env >> $SINGULARITY_ENVIRONMENT 
+    SHELL=bash perlbrew env >> $SINGULARITY_ENVIRONMENT 
 
 %runscript
     source $PERLBREW_ROOT/etc/bashrc
