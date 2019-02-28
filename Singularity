@@ -12,6 +12,7 @@ From: ubuntu:bionic
 %post
     env
     mkdir -p /opt/perl5/perlbrew
+    apt-get -y update && apt-get -y install curl perl
     curl -L https://install.perlbrew.pl | bash
     perlbrew init
     SHELL=bash perlbrew env >> $SINGULARITY_ENVIRONMENT 
