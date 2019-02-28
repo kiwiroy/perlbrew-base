@@ -1,5 +1,5 @@
-BootStrap: shub
-From: shub://singularityhub/ubuntu
+BootStrap: docker
+From: ubuntu:bionic
 
 %labels
     Author kiwiroy@users-noreply.github.com
@@ -7,10 +7,9 @@ From: shub://singularityhub/ubuntu
     Version 1.00
 
 %post
-    apt-get update && apt-get install --assume-yes apt-utils
-    apt-get install -y perlbrew
+    apt-get update && apt-get install -y perlbrew
     perlbrew init
     env >&2
 
 %script
-    perl
+    perl -lE 'say q{hello};'
