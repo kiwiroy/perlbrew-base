@@ -9,7 +9,7 @@ From: ubuntu:bionic
 %post
     apt-get update && apt-get install -y perlbrew
     perlbrew init
-    source ~/perl5/perlbrew/etc/bashrc
+    perlbrew env
     env >&2
 
 %script
