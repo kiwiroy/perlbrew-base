@@ -11,9 +11,10 @@ From: ubuntu:bionic
     mkdir -p ${PERLBREW_ROOT}
     apt-get -y update && apt-get -y install curl perl
     curl -L https://install.perlbrew.pl | bash
-    env
     ${PERLBREW_ROOT}/bin/perlbrew init
+    source ${PERLBREW_ROOT}/etc/bashrc
     ${PERLBREW_ROOT}/bin/perlbrew install-cpanm
+    env
     SHELL=bash ${PERLBREW_ROOT}/bin/perlbrew env >> $SINGULARITY_ENVIRONMENT 
 
 %runscript
