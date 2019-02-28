@@ -9,8 +9,8 @@ From: ubuntu:bionic
 %post
     apt-get update && apt-get install -y perlbrew
     perlbrew init
-    perlbrew env
-    env >&2
+    SHELL=ash perlbrew env >> $SINGULARITY_ENVIRONMENT 
 
-%script
+%runscript
+    source $PERLBREW_ROOT/etc/bashrc
     perl -lE 'say q{hello};'
