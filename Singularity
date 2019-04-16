@@ -14,8 +14,7 @@ From: ubuntu:bionic
     ${PERLBREW_ROOT}/bin/perlbrew init
     . ${PERLBREW_ROOT}/etc/bashrc
     ${PERLBREW_ROOT}/bin/perlbrew install-cpanm
-    env
-    SHELL=bash ${PERLBREW_ROOT}/bin/perlbrew env >> $SINGULARITY_ENVIRONMENT 
+    ${PERLBREW_ROOT}/bin/perlbrew env >> $SINGULARITY_ENVIRONMENT 
 
 %runscript
     perl -lE 'say q{hello}; say $^X;'
