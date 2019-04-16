@@ -6,7 +6,7 @@ From: ubuntu:bionic
     Maintainer kiwiroy@users-noreply.github.com
     Version 1.00
 
-%post
+%post -c /bin/bash
     export PERLBREW_ROOT=/opt/perl5/perlbrew
     mkdir -p ${PERLBREW_ROOT}
     apt-get -y update && apt-get -y install curl perl
