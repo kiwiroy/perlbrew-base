@@ -17,7 +17,7 @@ From: ubuntu:bionic
     curl -L https://install.perlbrew.pl | bash
     ${PERLBREW_ROOT}/bin/perlbrew init
     source ${PERLBREW_ROOT}/etc/bashrc
-    perlbrew install-cpanm
+    perlbrew install-cpanm --yes
     perlbrew install-patchperl --yes
     perlbrew env >> $SINGULARITY_ENVIRONMENT
     echo 'export PATH="${PERLBREW_PATH}:${PATH}"' >> $SINGULARITY_ENVIRONMENT
