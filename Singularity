@@ -13,7 +13,7 @@ From: ubuntu:bionic
 %post -c /bin/bash
     export PERLBREW_ROOT=/opt/perl5/perlbrew
     mkdir -p ${PERLBREW_ROOT}
-    apt-get -y update && apt-get -y install curl perl patch
+    apt-get -y update && apt-get -y install curl perl patch build-essential
     curl -L https://install.perlbrew.pl | bash
     ${PERLBREW_ROOT}/bin/perlbrew init
     . ${PERLBREW_ROOT}/etc/bashrc
