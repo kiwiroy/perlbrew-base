@@ -6,6 +6,10 @@ From: ubuntu:bionic
     Maintainer kiwiroy@users-noreply.github.com
     Version 1.00
 
+%environment
+    PERLBREW_CPAN_MIRROR=https://cpan.metacpan.org
+    export PERLBREW_CPAN_MIRROR
+
 %post -c /bin/bash
     export PERLBREW_ROOT=/opt/perl5/perlbrew
     mkdir -p ${PERLBREW_ROOT}
