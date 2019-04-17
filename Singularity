@@ -16,9 +16,10 @@ From: ubuntu:bionic
     apt-get -y update && apt-get -y install curl perl patch build-essential
     curl -L https://install.perlbrew.pl | bash
     ${PERLBREW_ROOT}/bin/perlbrew init
-    . ${PERLBREW_ROOT}/etc/bashrc
-    ${PERLBREW_ROOT}/bin/perlbrew install-cpanm
-    ${PERLBREW_ROOT}/bin/perlbrew env >> $SINGULARITY_ENVIRONMENT
+    source ${PERLBREW_ROOT}/etc/bashrc
+    perlbrew install-cpanm
+    perlbrew install-patchperl --yes
+    perlbrew env >> $SINGULARITY_ENVIRONMENT
     echo 'export PATH="${PERLBREW_PATH}:${PATH}"' >> $SINGULARITY_ENVIRONMENT
 
 %runscript
