@@ -24,3 +24,6 @@ From: ubuntu:bionic
 
 %runscript
     perl -lE 'say q{hello}; say $^X;'
+
+%test
+    echo ${PERLBREW_ROOT}
