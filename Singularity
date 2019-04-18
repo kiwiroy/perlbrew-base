@@ -26,4 +26,4 @@ From: ubuntu:bionic
     perl -lE 'say q{hello}; say $^X;'
 
 %test
-    echo ${PERLBREW_ROOT}
+    /opt/perl5/perlbrew/bin/perlbrew version
