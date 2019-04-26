@@ -11,8 +11,8 @@ From: ubuntu:bionic
     export PERLBREW_CPAN_MIRROR
 
 %post -c /bin/bash
-    echo "\n#Using bash as default shell\n" >> $SINGULARITY_ENVIRONMENT 
-    echo 'export SHELL=/bin/bash'           >> $SINGULARITY_ENVIRONMENT
+    echo "# Using bash as default shell" >> $SINGULARITY_ENVIRONMENT
+    echo 'export SHELL=/bin/bash'        >> $SINGULARITY_ENVIRONMENT
     ## where to install
     export PERLBREW_ROOT=/opt/perl5/perlbrew
     mkdir -p ${PERLBREW_ROOT}
