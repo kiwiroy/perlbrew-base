@@ -9,7 +9,8 @@ From: ubuntu:bionic
 %environment
     PERLBREW_CPAN_MIRROR=https://cpan.metacpan.org
     PERLBREW_SKIP_INIT=1
-    export PERLBREW_CPAN_MIRROR PERLBREW_SKIP_INIT
+    perlbrew_command=/opt/perl5/perlbrew/bin/perlbrew
+    export PERLBREW_CPAN_MIRROR PERLBREW_SKIP_INIT perlbrew_command
 
 %post -c /bin/bash
     echo '****************************************************'
@@ -41,7 +42,8 @@ From: ubuntu:bionic
     echo '# Using bash as default shell' >  $SINGULARITY_ENVIRONMENT
     echo "export SHELL=$SHELL"           >> $SINGULARITY_ENVIRONMENT
     echo "export PERLBREW_HOME=$PERLBREW_HOME"    >> $SINGULARITY_ENVIRONMENT
-    perlbrew env >> $SINGULARITY_ENVIRONMENT
+    PERLBREW_LIB= \
+    PERL5LIB= PERL_LOCAL_LIB_ROOT= perlbrew env   >> $SINGULARITY_ENVIRONMENT
     echo 'export PATH="${PERLBREW_PATH}:${PATH}"' >> $SINGULARITY_ENVIRONMENT
 
 %runscript
