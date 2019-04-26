@@ -28,5 +28,6 @@ From: ubuntu:bionic
 %runscript
     perl -lE 'say q{hello}; say $^X;'
 
-%test -c /bin/bash
+%test
+    env
     /opt/perl5/perlbrew/bin/perlbrew version
