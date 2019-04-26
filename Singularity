@@ -8,14 +8,13 @@ From: ubuntu:bionic
 
 %environment
     PERLBREW_CPAN_MIRROR=https://cpan.metacpan.org
-    PERLBREW_ROOT=/opt/perl5/perlbrew
-    export PERLBREW_CPAN_MIRROR PERLBREW_ROOT
+    export PERLBREW_CPAN_MIRROR
 
 %post -c /bin/bash
     echo "# Using bash as default shell" >> $SINGULARITY_ENVIRONMENT
     echo 'export SHELL=/bin/bash'        >> $SINGULARITY_ENVIRONMENT
     ## where to install
-    env
+    export PERLBREW_ROOT=/opt/perl5/perlbrew
     mkdir -p ${PERLBREW_ROOT}
     apt-get -y update && apt-get -y install curl perl patch build-essential
     curl -L https://install.perlbrew.pl | bash
