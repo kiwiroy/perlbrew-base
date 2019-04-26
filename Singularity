@@ -8,13 +8,15 @@ From: ubuntu:bionic
 
 %environment
     PERLBREW_CPAN_MIRROR=https://cpan.metacpan.org
-    export PERLBREW_CPAN_MIRROR
+    PERLBREW_SKIP_INIT=1
+    export PERLBREW_CPAN_MIRROR PERLBREW_SKIP_INIT
 
 %post -c /bin/bash
     echo '# Using bash as default shell' >> $SINGULARITY_ENVIRONMENT
     echo 'export SHELL=/bin/bash'        >> $SINGULARITY_ENVIRONMENT
-    ## where to install
+    ## where to install (similar to HOME=/opt)
     export PERLBREW_ROOT=/opt/perl5/perlbrew
+    export PERLBREW_HOME=/opt/.perlbrew
     mkdir -p ${PERLBREW_ROOT}
     apt-get -y update && apt-get -y install curl perl patch build-essential
     curl -L https://install.perlbrew.pl | bash
@@ -23,6 +25,7 @@ From: ubuntu:bionic
     perlbrew install-cpanm --yes
     perlbrew install-patchperl --yes
     perlbrew env >> $SINGULARITY_ENVIRONMENT
+    echo 'export PERLBREW_HOME=/opt/.perlbrew'    >> $SINGULARITY_ENVIRONMENT
     echo 'export PATH="${PERLBREW_PATH}:${PATH}"' >> $SINGULARITY_ENVIRONMENT
 
 %runscript
@@ -32,5 +35,5 @@ From: ubuntu:bionic
     if test "${SINGULARITY_CHECKTAGS:-}" = "bootstrap"; then
       . $SINGULARITY_ENVIRONMENT
     fi
-    env
     perlbrew version
+    env | grep -i ^perl
