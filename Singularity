@@ -11,7 +11,7 @@ From: ubuntu:bionic
     export PERLBREW_CPAN_MIRROR
 
 %post -c /bin/bash
-    echo "# Using bash as default shell" >> $SINGULARITY_ENVIRONMENT
+    echo '# Using bash as default shell' >> $SINGULARITY_ENVIRONMENT
     echo 'export SHELL=/bin/bash'        >> $SINGULARITY_ENVIRONMENT
     ## where to install
     export PERLBREW_ROOT=/opt/perl5/perlbrew
@@ -29,5 +29,8 @@ From: ubuntu:bionic
     perl -lE 'say q{hello}; say $^X;'
 
 %test
+    if test "${SINGULARITY_CHECKTAGS:-}" = "bootstrap"; then
+      . $SINGULARITY_ENVIRONMENT
+    fi
     env
-    /opt/perl5/perlbrew/bin/perlbrew version
+    perlbrew version
