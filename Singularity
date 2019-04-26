@@ -11,6 +11,9 @@ From: ubuntu:bionic
     export PERLBREW_CPAN_MIRROR
 
 %post -c /bin/bash
+    echo "\n#Using bash as default shell\n" >> $SINGULARITY_ENVIRONMENT 
+    echo 'export SHELL=/bin/bash'           >> $SINGULARITY_ENVIRONMENT
+    ## where to install
     export PERLBREW_ROOT=/opt/perl5/perlbrew
     mkdir -p ${PERLBREW_ROOT}
     apt-get -y update && apt-get -y install curl perl patch build-essential
@@ -25,5 +28,5 @@ From: ubuntu:bionic
 %runscript
     perl -lE 'say q{hello}; say $^X;'
 
-%test
+%test -c /bin/bash
     /opt/perl5/perlbrew/bin/perlbrew version
