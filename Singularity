@@ -21,12 +21,12 @@ From: ubuntu:bionic
     export PERLBREW_HOME=/opt/.perlbrew
     mkdir -p "${PERLBREW_ROOT}" "${PERLBREW_HOME}"
     env | grep -i ^perl
-    
+
     echo '****************************************************'
     echo 'Install dependencies / utils'
     echo '****************************************************'
     apt-get -y update && apt-get -y install curl perl patch build-essential git
-    
+
     echo '****************************************************'
     echo 'Install perl'
     echo '****************************************************'
@@ -35,7 +35,7 @@ From: ubuntu:bionic
     source ${PERLBREW_ROOT}/etc/bashrc
     perlbrew install-cpanm --yes
     perlbrew install-patchperl --yes
-    
+
     echo '****************************************************'
     echo 'Store Environment'
     echo '****************************************************'
@@ -46,8 +46,26 @@ From: ubuntu:bionic
     PERL5LIB= PERL_LOCAL_LIB_ROOT= perlbrew env   >> $SINGULARITY_ENVIRONMENT
     echo 'export PATH="${PERLBREW_PATH}:${PATH}"' >> $SINGULARITY_ENVIRONMENT
 
+%apprun cpanm
+    if ! test -d "${PERLBREW_HOME:-/fail}/libs" ; then
+      echo "Directory '${PERLBREW_HOME:-/fail}/libs' does not exist." >&2
+      echo "Consider using --bind /host/path/libs:$PERLBREW_HOME/libs" >&2
+      exit
+    fi
+    source "${PERLBREW_ROOT:/fail}/etc/bashrc"
+    perlbrew lib create "${PERLBREW_PERL}@${PERLBREW_LIB:-singularity-perl}"
+    perlbrew use "${PERLBREW_PERL}@${PERLBREW_LIB:-singularity-perl}"
+    exec cpanm "${@}"
+
+%apprun perl
+    echo "Warning this is system perl ($(perl -E 'say $^V'))" >&2
+    exec perl "${@}"
+
+%apprun perlbrew
+    exec perlbrew "${@}"
+
 %runscript
-    perl -lE 'say q{hello}; say $^X;'
+    exec perlbrew "${@}"
 
 %test
     if test "${SINGULARITY_CHECKTAGS:-}" = "bootstrap"; then
