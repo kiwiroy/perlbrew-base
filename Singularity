@@ -52,7 +52,7 @@ From: ubuntu:bionic
       echo "Consider using --bind /host/path/libs:$PERLBREW_HOME/libs" >&2
       exit
     fi
-    source "${PERLBREW_ROOT:/fail}/etc/bashrc"
+    source "${PERLBREW_ROOT:-/fail}/etc/bashrc"
     perlbrew lib create "${PERLBREW_PERL}@${PERLBREW_LIB:-singularity-perl}"
     perlbrew use "${PERLBREW_PERL}@${PERLBREW_LIB:-singularity-perl}"
     exec cpanm "${@}"
