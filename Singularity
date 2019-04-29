@@ -11,6 +11,8 @@ From: ubuntu:bionic
     PERLBREW_SKIP_INIT=1
     perlbrew_command=/opt/perl5/perlbrew/bin/perlbrew
     export PERLBREW_CPAN_MIRROR PERLBREW_SKIP_INIT perlbrew_command
+    SHELL=/bin/bash
+    export SHELL
 
 %post -c /bin/bash
     echo '****************************************************'
@@ -25,6 +27,8 @@ From: ubuntu:bionic
     echo '****************************************************'
     echo 'Install dependencies / utils'
     echo '****************************************************'
+    echo "dash dash/sh boolean false" | debconf-set-selections
+    dpkg-reconfigure dash
     apt-get -y update && apt-get -y install curl perl patch build-essential git
 
     echo '****************************************************'
